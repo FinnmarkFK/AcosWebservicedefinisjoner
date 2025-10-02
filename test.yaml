@@ -4,63 +4,91 @@ info:
   version: 1.0.0
 servers:
   - url: https://prod-05.norwaywest.logic.azure.com/workflows/f59e752e0bef4eb8a3131ea8051fc8af/triggers/When_an_HTTP_request_is_received
+tags:
+  - name: default
 paths:
   /paths/invoke:
     post:
-      operationId: invokeLogicApp
+      tags:
+        - default
       summary: Kall Logic App
       parameters:
         - in: query
           name: api-version
           required: true
-          schema: { type: string }
+          schema:
+            type: string
           example: "2016-10-01"
         - in: query
           name: sp
           required: true
-          schema: { type: string }
+          schema:
+            type: string
           example: "/triggers/When_an_HTTP_request_is_received/run"
         - in: query
           name: sv
           required: true
-          schema: { type: string }
+          schema:
+            type: string
           example: "1.0"
         - in: query
           name: sig
           required: true
-          schema: { type: string }
+          schema:
+            type: string
           description: Shared access signature key
       requestBody:
         required: true
-        description: Mottakerpayload
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RecipientPayload'
-        x-bodyName: body   # many tools understand this; harmless if ignored
+              type: object
+              properties:
+                recipient:
+                  type: object
+                  properties:
+                    Id:
+                      type: string
+                      description: Fødselsnummer eller organisasjonsnummer
+                    IdType:
+                      type: string
+                      description: Type identifikator (f.eks. person eller organization)
+                    FirstName:
+                      type: string
+                      description: Fornavn på mottaker
+                    LastName:
+                      type: string
+                      description: Etternavn på mottaker
+                    Address:
+                      type: string
+                      description: Gateadresse
+                    Address2:
+                      type: string
+                      description: Tilleggsadresse (valgfritt)
+                    Zipcode:
+                      type: string
+                      description: Postnummer
+                    City:
+                      type: string
+                      description: Poststed/by
+                    Country:
+                      type: string
+                      description: Land (kan være tom)
+                    Mail:
+                      type: string
+                      description: E-postadresse (kan være tom)
+                    Mobile:
+                      type: string
+                      description: Mobilnummer (kan være tom)
+              required:
+                - recipient
       responses:
         "200":
           description: Forespørselen ble utført uten feil
           content:
             application/json:
-              schema: { type: object }
-components:
-  schemas:
-    RecipientPayload:
-      type: object
-      properties:
-        recipient:
-          type: object
-          properties:
-            Id:        { type: string, description: "Fødselsnummer eller orgnr" }
-            IdType:    { type: string, description: "person | organization" }
-            FirstName: { type: string }
-            LastName:  { type: string }
-            Address:   { type: string }
-            Address2:  { type: string }
-            Zipcode:   { type: string }
-            City:      { type: string }
-            Country:   { type: string }
-            Mail:      { type: string }
-            Mobile:    { type: string }
-      required: [recipient]
+              schema:
+                type: object
+      x-codegen-request-body-name: body
+components: {}
+x-original-swagger-version: "2.0"
