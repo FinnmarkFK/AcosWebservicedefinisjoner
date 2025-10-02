@@ -1,0 +1,30 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Swagger Petstore (Simple)"
+  },
+  "host": "petstore.swagger.io",
+  "basePath": "/v2",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/pet/findByStatus": {
+      "get": {
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}
