@@ -1,0 +1,68 @@
+openapi: 3.0.1
+info:
+  title: Minimal Logic App API
+  version: 1.0.0
+servers:
+  - url: https://example.com/
+tags:
+  - name: default
+paths:
+  /invoke:
+    post:
+      tags:
+        - default
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                recipient:
+                  type: object
+                  properties:
+                    Id:
+                      type: string
+                      description: Fødselsnummer eller organisasjonsnummer
+                    IdType:
+                      type: string
+                      description: Type identifikator (f.eks. person eller organization)
+                    FirstName:
+                      type: string
+                      description: Fornavn på mottaker
+                    LastName:
+                      type: string
+                      description: Etternavn på mottaker
+                    Address:
+                      type: string
+                      description: Gateadresse
+                    Address2:
+                      type: string
+                      description: Tilleggsadresse (valgfritt)
+                    Zipcode:
+                      type: string
+                      description: Postnummer
+                    City:
+                      type: string
+                      description: Poststed/by
+                    Country:
+                      type: string
+                      description: Land (kan være tom)
+                    Mail:
+                      type: string
+                      description: E-postadresse (kan være tom)
+                    Mobile:
+                      type: string
+                      description: Mobilnummer (kan være tom)
+              required:
+                - recipient
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+      x-codegen-request-body-name: body
+components: {}
+x-original-swagger-version: "2.0"
