@@ -4,7 +4,6 @@ info:
   version: 1.0.0
 servers:
   - url: https://prod-05.norwaywest.logic.azure.com/workflows/f59e752e0bef4eb8a3131ea8051fc8af/triggers/When_an_HTTP_request_is_received
-
 paths:
   /paths/invoke:
     post:
