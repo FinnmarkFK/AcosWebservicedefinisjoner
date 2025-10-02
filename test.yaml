@@ -1,0 +1,29 @@
+openapi: 3.0.1
+info:
+  title: Minimal Logic App API
+  version: 1.0.0
+servers:
+- url: https://example.com/
+tags:
+- name: default
+paths:
+  /invoke:
+    post:
+      tags:
+      - default
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+      x-codegen-request-body-name: body
+components: {}
+x-original-swagger-version: "2.0"
