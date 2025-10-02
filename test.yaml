@@ -1,16 +1,42 @@
 openapi: 3.0.1
 info:
-  title: Minimal Logic App API
+  title: Logic App HTTP Trigger
   version: 1.0.0
 servers:
-  - url: https://example.com/
+  - url: https://prod-05.norwaywest.logic.azure.com
 tags:
   - name: default
 paths:
-  /invoke:
+  /workflows/f59e752e0bef4eb8a3131ea8051fc8af/triggers/When_an_HTTP_request_is_received/paths/invoke:
     post:
       tags:
         - default
+      summary: Kall Logic App
+      parameters:
+        - in: query
+          name: api-version
+          required: true
+          schema:
+            type: string
+          example: "2016-10-01"
+        - in: query
+          name: sp
+          required: true
+          schema:
+            type: string
+          example: "/triggers/When_an_HTTP_request_is_received/run"
+        - in: query
+          name: sv
+          required: true
+          schema:
+            type: string
+          example: "1.0"
+        - in: query
+          name: sig
+          required: true
+          schema:
+            type: string
+          description: Shared access signature key
       requestBody:
         required: true
         content:
@@ -58,7 +84,7 @@ paths:
                 - recipient
       responses:
         "200":
-          description: OK
+          description: Forespørselen ble utført uten feil
           content:
             application/json:
               schema:
