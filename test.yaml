@@ -80,6 +80,15 @@ paths:
                     Mobile:
                       type: string
                       description: Mobilnummer (kan være tom)
+                    CC:
+                      type: array
+                      description: Kopi-til person/organisasjon/intern
+                        Id:
+                          type: string
+                          description: Fødselsnummer, organisasjonsnummer, internId
+                        IdType:
+                          type: string
+                          description: Type identifikator (f.eks. person eller organization)
               required:
                 - recipient
       responses:
