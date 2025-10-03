@@ -83,12 +83,15 @@ paths:
                     CC:
                       type: array
                       description: Kopi-til person/organisasjon/intern
-                        Id:
-                          type: string
-                          description: Fødselsnummer, organisasjonsnummer, internId
-                        IdType:
-                          type: string
-                          description: Type identifikator (f.eks. person eller organization)
+                      items:
+                        type: object
+                        properties:
+                          Id:
+                            type: string
+                            description: Fødselsnummer, organisasjonsnummer, internId
+                          IdType:
+                            type: string
+                            description: Type identifikator (f.eks. person eller organization)
               required:
                 - recipient
       responses:
